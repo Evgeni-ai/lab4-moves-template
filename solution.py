@@ -35,3 +35,6 @@ def book_for(character):
     Комплект зарядов nova — свой у каждого персонажа.
     """
     raise NotImplementedError
+
+
+

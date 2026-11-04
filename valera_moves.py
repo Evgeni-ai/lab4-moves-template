@@ -5,16 +5,22 @@
 Запускается, тесты не писал.
 """
 
+import inspect
+
 def hit(targets, dmg):
     for t in targets:
-        t["hp"] -= dmg
+        t["hp"] = max(t["hp"]-dmg , 0)
     return dmg * len(targets)
 
 
 def strike(user, target, crit=False, log=[]):
     """Удар: 10 урона, при крите вдвое. Журнал можно не передавать — заведётся сам."""
+
     if user["mana"] < 5:
         return None
+    if len(target) != 1:
+        return None
+    
     user["mana"] -= 5
     dmg = hit([target], 20 if crit else 10)
     log.append((user["name"], "strike", dmg))
@@ -37,3 +43,6 @@ BOOK = {"strike": strike, "nova": nova, "fire1": fires[0], "fire2": fires[1], "f
 
 def cast(name, user, *targets, **effects):
     return BOOK[name](user, *targets, **effects)
+
+
+print(inspect.signature(nova))

@@ -43,6 +43,3 @@ BOOK = {"strike": strike, "nova": nova, "fire1": fires[0], "fire2": fires[1], "f
 
 def cast(name, user, *targets, **effects):
     return BOOK[name](user, *targets, **effects)
-
-
-print(inspect.signature(nova))

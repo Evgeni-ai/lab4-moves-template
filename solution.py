@@ -158,8 +158,16 @@ def limited(move, charges):
             entry[1] -= 1
         return result
 
+    def remaining(user):
+        """Сколько зарядов осталось у user. Не тратит."""
+        entry = counters.get(id(user))
+        if entry is None or entry[0] is not user:
+            return charges
+        return entry[1]
+    
     wrapper.__name__ = move.__name__
     wrapper.__signature__ = inspect.signature(move)
+    wrapper.remaining = remaining
     return wrapper
 
 
